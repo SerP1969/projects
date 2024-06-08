@@ -1,0 +1,32 @@
+---
+- name: Item used example
+  hosts: GrpTot
+  become: yes
+
+  tasks:
+
+    - name: Create groups
+      ansible.builtin.group:
+        name: "{{item}}"
+        state: present
+      loop:
+        - dev
+        - buh
+
+    - name: Create users
+      ansible.builtin.user:
+        name: "{{item.username}}"
+        shell: /bin/bash
+        home: "/home/{{item.homedir}}"
+        groups:
+          - dev
+          - buh
+        append: yes
+        password: $6$mysecretsalt$agV86K5NffvY2PBsYAGCnXkA4kaDRm6ZuSnxigDK/XtPvkAGufFz5ligKdkgFvJKCpDy8zHYSyfQ3t/sz.KDd.
+
+      with_items:
+        - {username: user01, homedir: user01}
+        - {username: user02, homedir: user02}
+...
+        
+

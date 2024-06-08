@@ -1,0 +1,12 @@
+[GrpBuh]
+myfedora401 ansible_host=192.168.153.246
+
+[GrpHr]
+myfedora402 ansible_host=192.168.153.247
+
+[GrpIT]
+192.168.154.248 ansible_host=192.168.153.248 ansible_user=root ansible_password=3461
+
+[GrpTot:children]
+GrpBuh
+GrpHr

@@ -1,0 +1,25 @@
+---
+- name:  Simple Copy File
+  hosts: GrpTot
+  become: yes
+
+  tasks:
+
+  - name: Install packages via Vars
+    ansible.builtin.package:
+        name: "{{ packages }}"
+        state: latest
+    vars:
+      packages:
+      - httpd
+      - httpd-tools
+  
+  - name: Copy2
+    ansible.builtin.copy:
+      src: ./hosts
+      dest: /tmp
+      mode: 0644
+      owner: serp
+      group: serp     
+
+...

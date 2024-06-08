@@ -1,0 +1,17 @@
+---
+- name: Ping Service
+  hosts: GrpBuh
+  become: yes
+
+  tasks:
+
+  - name: Ping Task
+    ping:
+  - name: Update all package
+#    yum:
+#      name: '*'
+#      state: latest
+    ansible.builtin.package:
+        name: '*'
+        state: latest
+...

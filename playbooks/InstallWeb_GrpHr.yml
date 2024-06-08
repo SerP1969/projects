@@ -1,0 +1,23 @@
+---
+- name: Install Web + htop
+  hosts: GrpHr
+  become: yes
+
+  tasks:
+
+#  - name: Delete packages 
+#    ansible.builtin.package:
+#        name: 
+#          - httpd
+#          - htop
+#        state: absent
+  
+  - name: Install packages via Vars
+    ansible.builtin.package:
+        name: "{{ packages }}"
+        state: latest
+    vars:
+      packages:
+      - httpd
+      - httpd-tools
+...

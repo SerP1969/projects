@@ -1,0 +1,15 @@
+---
+- name: Loop example
+  hosts: GrpTot
+  become: yes
+
+  tasks:
+
+  - name: Create dirs via Loop
+    ansible.builtin.file:
+      path: "/home/serp/{{item}}"
+      state: directory
+    loop:
+      - dir1
+      - dir2
+...      

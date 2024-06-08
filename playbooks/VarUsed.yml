@@ -1,0 +1,28 @@
+---
+- name: Vars used example
+  hosts: GrpTot
+  become: yes
+  
+  vars:
+    packages:
+              - htop
+              - tree
+              - rsync
+    src_var: file123
+    dest_var: /tmp
+
+  tasks:
+
+  - name: Install packages
+    ansible.builtin.package:
+        name: "{{ packages }}"
+        state: latest
+
+  - name: Copy fale
+    ansible.builtin.copy:
+        src: '{{src_var}}'
+        dest: '{{dest_var}}'
+        mode: 0777
+        owner: root
+        group: serp
+...      

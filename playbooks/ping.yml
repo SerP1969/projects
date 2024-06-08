@@ -1,0 +1,8 @@
+- name: Ping Service
+  hosts: GrpTot
+  become: yes
+
+  tasks:
+
+  - name: Ping Task
+    ping:
