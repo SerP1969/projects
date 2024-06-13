@@ -1,0 +1,31 @@
+---
+- name: Debug Usag
+  hosts: GrpBuh
+  become: true
+
+  vars:
+    HostFQDN: "{{ ansible_hostname }}"
+#    ipv4_all: "{{ansible_all_ipv4_addresses}}"
+    DeviceName: "{{ansible_enp0s3.device}}"
+    ipv4_def: "{{ansible_default_ipv4}}"
+    
+  tasks:
+  
+  - name: Usage var
+    ansible.builtin.debug:
+      var: HostFQDN
+      
+#  - set_fact:
+#      message: "{{ipv4_all}}"
+    
+  - debug:
+     msg: "{{HostFQDN}}: {{DeviceName}}"
+  - debug:
+      msg: "{{ipv4_def.interface}}: {{ipv4_def.address}}/{{ipv4_def.prefix}} GW:{{ipv4_def.gateway}}"
+
+  - shell: "nmcli -g ip4.address,ip4.gateway,ip4.dns con show MyConPOCO"
+    register: IP4_POCO
+
+  - debug:
+      var: IP4_POCO
+...    

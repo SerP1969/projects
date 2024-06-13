@@ -1,0 +1,30 @@
+---
+- name: Block Usage
+  hosts: GrpTot
+  become: true
+
+  vars:
+  
+  tasks:
+
+  - name: Copy File
+    ansible.builtin.copy:
+      src: file123
+      dest: /srv/
+    when: 
+      - ansible_facts['distribution'] == "Fedora"
+      - ansible_hostname == "myfedora401"
+
+  - name: Get the version Fedora
+    set_fact:
+      major_ver: "{{ ansible_facts['distribution_major_version'] }}"
+#      temperature: "{{ ansible_facts['cpu_temperature'] }}"
+    
+  - ansible.builtin.debug:
+      var: major_ver
+
+  - name: Restart the system if major version > 39
+    when: major_ver | int > 39  # (or float)
+    shell: "reboot"
+
+...

@@ -1,0 +1,26 @@
+---
+- name: Block Usage
+  hosts: GrpTot
+  become: true
+
+  vars:
+    hostName: "{{ ansible_hostname }}"
+
+  tasks:
+
+  - block:
+    - name: Install packages
+      ansible.builtin.package:
+          name:
+            - tree
+            - htop
+            - httpd
+          state: present
+
+    - name: Create Folder
+      ansible.builtin.file:
+          path: /srv/folder1
+          state: directory
+    when: ansible_hostname == "myfedora401" 
+
+...

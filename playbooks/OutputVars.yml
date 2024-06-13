@@ -1,0 +1,26 @@
+---
+- name: Debug Usag
+  hosts: localhost
+  become: yes
+
+  vars:
+    Var01: home
+    Var02: in
+    Var03: Russia
+
+  tasks:
+  
+  - name: Usage var
+    ansible.builtin.debug:
+      var: Var01+" "+Var02+" "+Var03
+      
+  
+  - debug:
+      msg: "My {{Var01}} {{Var02}} {{Var03}}"
+
+  - set_fact:
+      message: "My {{Var01}} {{Var02}} {{Var03}}"
+    
+  - debug:
+      var: message
+...    
